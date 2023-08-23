@@ -1,6 +1,8 @@
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -28,7 +30,8 @@ public class Main {
             System.out.println("3: Modificar Estudiante");
             System.out.println("4: Consultar Todos Los Estudiantes");
             System.out.println("5: Consultar Estudiantes Por Semestre");
-            System.out.println("6: Terminar programa");
+            System.out.println("6: Leer archivo de txt");
+            System.out.println("7: Terminar programa");
 
             int opcion = lector.nextInt();
 
@@ -64,6 +67,11 @@ public class Main {
                     consultaEstudiantesSemestre(listadoEstudiantes, lector);
                     break;
                 case 6:
+                    
+                    String textoArchivo = leerArchivo("./data/archivoLeer.txt");
+                    System.out.println(textoArchivo);
+
+                case 7:
                     System.out.println("Terminar");
                     activo = false;
                     break;
@@ -157,9 +165,11 @@ public class Main {
 
     }
 
-    /**
-     * Metodo para eliminar a un estudiante del listado
-     */
+  /**
+   * Metodo para eliminar a un estudiante del registo 
+   * @param listadoEstudiantes
+   * @param lector 
+   */
     public static void eliminarEstudiante(ArrayList<Estudiante> listadoEstudiantes, Scanner lector) {
         System.out.println("Ingrese el numero de cedula para eliminar al estudiante ");
         String eliminarEstudiante = lector.next();
@@ -257,5 +267,23 @@ public class Main {
         if (!estudiantesEncontrados) {
             System.out.println("No se encontraron estudiantes en el semestre ingresado.");
         }
+    }
+ 
+    public  static String leerArchivo(String direccion) {
+        String texto = "";
+        try {
+            //crecreamos el fileReader y colocamos la dirrecion como parametro 
+            BufferedReader bf = new BufferedReader(new FileReader(direccion));
+            String temp = "";
+            String bfRead;
+            while ((bfRead = bf.readLine()) != null) {
+                //hacer ciclo mientras bfReader tiene datos
+                temp = temp + bfRead; // Texto del archivo guardado
+            }
+            texto = temp;
+        } catch (Exception e) {
+            System.err.println("No se ecnontro archivo");
+        }
+        return texto;
     }
 }
