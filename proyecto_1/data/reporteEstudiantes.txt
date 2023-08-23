@@ -1,0 +1,8 @@
+Reporte Estudiantes 
+===========================
+==============Listado de todos los estudiantes===============
+Nombre: Juan
+Apelldido: Goyes
+Cedula: 1081281837Semestre: 4
+Correo: juan@
+Celular: 312===========================================================
