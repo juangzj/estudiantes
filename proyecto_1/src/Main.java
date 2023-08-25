@@ -24,17 +24,14 @@ public class Main {
         ArrayList<Estudiante> listadoEstudiantes = new ArrayList<Estudiante>();
 
         do {
-            System.out.println("=============== Menu de opciones ============");
-            System.out.println("1: Insertar Estudiante");
-            System.out.println("2: Eliminar Estudiante");
-            System.out.println("3: Modificar Estudiante");
-            System.out.println("4: Consultar Todos Los Estudiantes");
-            System.out.println("5: Consultar Estudiantes Por Semestre");
-            System.out.println("6: Leer archivo de txt");
-            System.out.println("7: Terminar programa");
-
+            
+            //llamado al metodo mostrar menú
+            mostrarOpcionesMenu();
+            
+            //leer opcion del usuario 
             int opcion = lector.nextInt();
-
+            
+            //opcioes con switch
             switch (opcion) {
                 case 1:
                     System.out.println("=========Sección ========");
@@ -268,7 +265,11 @@ public class Main {
             System.out.println("No se encontraron estudiantes en el semestre ingresado.");
         }
     }
- 
+ /**
+  * 
+  * @param direccion
+  * @return 
+  */
     public  static String leerArchivo(String direccion) {
         String texto = "";
         try {
@@ -286,4 +287,19 @@ public class Main {
         }
         return texto;
     }
+    public static void mostrarOpcionesMenu (){
+    
+        System.out.println("=============== Menu de opciones ============");
+            System.out.println("1: Insertar Estudiante");
+            System.out.println("2: Eliminar Estudiante");
+            System.out.println("3: Modificar Estudiante");
+            System.out.println("4: Consultar Todos Los Estudiantes");
+            System.out.println("5: Consultar Estudiantes Por Semestre");
+            System.out.println("6: Leer archivo de txt");
+            System.out.println("7: Terminar programa");
+        
+        
+    
+    }
+    
 }
