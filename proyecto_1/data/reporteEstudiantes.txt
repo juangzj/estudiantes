@@ -1,5 +1,3 @@
-Reporte Estudiantes 
-===========================
-====================================
-No hay registro de algun estudiante
-====================================
+1081281837,Juan,Goyes,4,juan@,3123518298
+2222222222,Larry,Capija,4,juan@,2222222222
+3333333333,Alfredo,Rojas,4,alfredo@,3333333333

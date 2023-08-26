@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,7 +14,7 @@ import java.util.Scanner;
  */
 public class Main {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
         //funcion que permite leer la opcion del usuario
         Scanner lector = new Scanner(System.in);
 
@@ -24,13 +25,13 @@ public class Main {
         ArrayList<Estudiante> listadoEstudiantes = new ArrayList<Estudiante>();
 
         do {
-            
+
             //llamado al metodo mostrar menú
             mostrarOpcionesMenu();
-            
+
             //leer opcion del usuario 
             int opcion = lector.nextInt();
-            
+
             //opcioes con switch
             switch (opcion) {
                 case 1:
@@ -64,12 +65,15 @@ public class Main {
                     consultaEstudiantesSemestre(listadoEstudiantes, lector);
                     break;
                 case 6:
-                    
-                    String textoArchivo = leerArchivo("./data/archivoLeer.txt");
-                    System.out.println(textoArchivo);
+                    //try {
+                    leerArchivo(listadoEstudiantes);
+                    //} catch (Exception e) {
+                    //System.err.println("No se encontro archivo");
+                    //}
+                    break;
 
                 case 7:
-                    System.out.println("Terminar");
+                    System.out.println("El programa ha finalizado");
                     activo = false;
                     break;
                 default:
@@ -81,6 +85,28 @@ public class Main {
 
     }
 
+    /**
+     * Metodo para mostrar el menu de opciones
+     */
+    public static void mostrarOpcionesMenu() {
+
+        System.out.println("=============== Menu de opciones ============");
+        System.out.println("1: Insertar Estudiante");
+        System.out.println("2: Eliminar Estudiante");
+        System.out.println("3: Modificar Estudiante");
+        System.out.println("4: Consultar Todos Los Estudiantes");
+        System.out.println("5: Consultar Estudiantes Por Semestre");
+        System.out.println("6: Leer archivo de txt");
+        System.out.println("7: Terminar programa");
+
+    }
+
+    /**
+     * Metodo para agregar estudiante
+     *
+     * @param registroEstudiantes
+     * @param lector
+     */
     public static void agregarEstudiante(ArrayList<Estudiante> registroEstudiantes, Scanner lector) {
         //Crear un nuevo estudainte desde la clase Estudiante
         Estudiante registroNuevoEstudiante = new Estudiante();
@@ -107,7 +133,7 @@ public class Main {
 
         //lectura del numero de celular del estudiante
         System.out.println("Ingrese el numero del estudiante");
-        registroNuevoEstudiante.setCelular(lector.nextInt());
+        registroNuevoEstudiante.setCelular(lector.next());
 
         //agregar estudiante al array 
         registroEstudiantes.add(registroNuevoEstudiante);
@@ -148,7 +174,7 @@ public class Main {
 
             //lectura del numero de celular del estudiante
             System.out.println("Ingrese el nuevo numero de celular del estudiante");
-            int numeroModificado = lector.nextInt();
+            String numeroModificado = lector.next();
             estudiante.setCelular(numeroModificado);
 
             //cerrar la bandera para finalizar la modificacion 
@@ -162,11 +188,12 @@ public class Main {
 
     }
 
-  /**
-   * Metodo para eliminar a un estudiante del registo 
-   * @param listadoEstudiantes
-   * @param lector 
-   */
+    /**
+     * Metodo para eliminar a un estudiante del registo
+     *
+     * @param listadoEstudiantes
+     * @param lector
+     */
     public static void eliminarEstudiante(ArrayList<Estudiante> listadoEstudiantes, Scanner lector) {
         System.out.println("Ingrese el numero de cedula para eliminar al estudiante ");
         String eliminarEstudiante = lector.next();
@@ -196,36 +223,31 @@ public class Main {
         //crear la pluma para escribir el archivo 
         PrintWriter pluma = new PrintWriter(archivo);
 
-        //Escribir con la pluma en el archivo 
-        pluma.println("Reporte Estudiantes ");
-        pluma.println("===========================");
-
         if (listadoEstudiantes.isEmpty()) {
             System.out.println("====================================");
             System.out.println("No hay registro de algun estudiante");
             System.out.println("====================================");
-            pluma.println("====================================");
-            pluma.println("No hay registro de algun estudiante");
-            pluma.println("====================================");
 
         } else {
             for (Estudiante estudiantesTotales : listadoEstudiantes) {
                 System.out.println("==============Listado de todos los estudiantes===============");
-                pluma.println("==============Listado de todos los estudiantes===============");
+                //pluma.println("==============Listado de todos los estudiantes===============");
                 System.out.println("Nombre: " + estudiantesTotales.getNombre());
-                pluma.println("Nombre: " + estudiantesTotales.getNombre());
+                //pluma.println("Nombre: " + estudiantesTotales.getNombre());
                 System.out.println("Apelldido: " + estudiantesTotales.getApellido());
-                pluma.println("Apelldido: " + estudiantesTotales.getApellido());
+                //pluma.println("Apelldido: " + estudiantesTotales.getApellido());
                 System.out.println("Cedula: " + estudiantesTotales.getCedula());
-                pluma.println("Cedula: " + estudiantesTotales.getCedula());
+                //pluma.println("Cedula: " + estudiantesTotales.getCedula());
                 System.out.println("Semestre: " + estudiantesTotales.getSemestre());
-                pluma.println("Semestre: " + estudiantesTotales.getSemestre());
+                //pluma.println("Semestre: " + estudiantesTotales.getSemestre());
                 System.out.println("Correo: " + estudiantesTotales.getCorreo());
-                pluma.println("Correo: " + estudiantesTotales.getCorreo());
+                //pluma.println("Correo: " + estudiantesTotales.getCorreo());
                 System.out.println("Celular: " + estudiantesTotales.getCelular());
-                pluma.println("Celular: " + estudiantesTotales.getCelular());
+                //pluma.println("Celular: " + estudiantesTotales.getCelular());
                 System.out.println("==============================================================");
-                pluma.println("===========================================================");
+                //pluma.println("===========================================================");
+
+                pluma.println(estudiantesTotales.getCedula() + "," + estudiantesTotales.getNombre() + "," + estudiantesTotales.getApellido() + "," + estudiantesTotales.getSemestre() + "," + estudiantesTotales.getCorreo() + "," + estudiantesTotales.getCelular());
 
             }
         }
@@ -265,41 +287,50 @@ public class Main {
             System.out.println("No se encontraron estudiantes en el semestre ingresado.");
         }
     }
- /**
-  * 
-  * @param direccion
-  * @return 
-  */
-    public  static String leerArchivo(String direccion) {
-        String texto = "";
-        try {
-            //crecreamos el fileReader y colocamos la dirrecion como parametro 
-            BufferedReader bf = new BufferedReader(new FileReader(direccion));
-            String temp = "";
-            String bfRead;
-            while ((bfRead = bf.readLine()) != null) {
-                //hacer ciclo mientras bfReader tiene datos
-                temp = temp + bfRead; // Texto del archivo guardado
-            }
-            texto = temp;
-        } catch (Exception e) {
-            System.err.println("No se ecnontro archivo");
+
+    /**
+     *
+     * @param listadoEstudiantes
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public static void leerArchivo(ArrayList<Estudiante> listadoEstudiantes) throws FileNotFoundException, IOException {
+
+        File archivo = new File("./data/reporteEstudiantes.txt");
+        FileReader fr = new FileReader(archivo);
+        BufferedReader lector = new BufferedReader(fr);
+
+        String linea = lector.readLine();
+        while (linea != null) {
+
+            String[] datos = linea.split(",");
+            String cedulaL = datos[0];
+            String nombreL = datos[1];
+            String apellidoL = datos[2];
+            String semestreL = datos[3];
+            String correoL = datos[4];
+            String celularL = datos[5];
+
+            //llamamos al metodo constructor de estudiante para crear un nuevo estudiante 
+            Estudiante estudianteL = new Estudiante();
+
+            //agregamos los datos en el constructor para crear el nuevo estudiante
+            estudianteL.setCedula(cedulaL);
+            estudianteL.setNombre(nombreL);
+            estudianteL.setApellido(apellidoL);
+            int semestreLN = Integer.parseInt(semestreL);
+            estudianteL.setSemestre(semestreLN);
+            estudianteL.setCorreo(correoL);
+            estudianteL.setCelular(celularL);
+
+            //añadimos al estudiante al listado de estudiantes
+            listadoEstudiantes.add(estudianteL);
+
+            linea = lector.readLine();
+
         }
-        return texto;
+        fr.close();
+        lector.close();
     }
-    public static void mostrarOpcionesMenu (){
-    
-        System.out.println("=============== Menu de opciones ============");
-            System.out.println("1: Insertar Estudiante");
-            System.out.println("2: Eliminar Estudiante");
-            System.out.println("3: Modificar Estudiante");
-            System.out.println("4: Consultar Todos Los Estudiantes");
-            System.out.println("5: Consultar Estudiantes Por Semestre");
-            System.out.println("6: Leer archivo de txt");
-            System.out.println("7: Terminar programa");
-        
-        
-    
-    }
-    
+
 }

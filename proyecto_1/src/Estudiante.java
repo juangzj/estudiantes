@@ -11,12 +11,12 @@ public class Estudiante {
     private String apellido;
     private int semestre;
     private String correo;
-    private int celular;
+    private String celular;
 
     public Estudiante() {
     }
 
-    public Estudiante(String cedula, String nombre, String apellido, int semestre, String correo, int celular) {
+    public Estudiante(String cedula, String nombre, String apellido, int semestre, String correo, String celular) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -45,7 +45,7 @@ public class Estudiante {
         return correo;
     }
 
-    public int getCelular() {
+    public String getCelular() {
         return celular;
     }
 
@@ -69,7 +69,7 @@ public class Estudiante {
         this.correo = correo;
     }
 
-    public void setCelular(int celular) {
+    public void setCelular(String celular) {
         this.celular = celular;
     }
     
